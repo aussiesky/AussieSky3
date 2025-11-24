@@ -6,11 +6,11 @@
   const isIndex = /index\.html$/.test(path);
   const isLander = /lander\.html$/.test(path);
 
-  // Check sessionStorage to prevent modal reappearing on index.html
+  // Only show modal on root or lander
   if (!isRoot && !isLander) return;
 
-  // If modal already shown on this session, skip
-  if (sessionStorage.getItem('modal_shown')) return;
+  // On index (root), prevent modal from reappearing in same session
+  if (isRoot && sessionStorage.getItem('modal_shown')) return;
 
   // Create Modal
   const bd = document.createElement('div');
@@ -36,8 +36,10 @@
   yes.addEventListener('click', handleClick);
   no.addEventListener('click', handleClick);
 
-  // Mark modal as shown
-  sessionStorage.setItem('modal_shown', '1');
+  // Mark modal as shown **only on root/index**
+  if (isRoot) {
+    sessionStorage.setItem('modal_shown', '1');
+  }
 
   function handleClick() {
 

@@ -34,6 +34,7 @@ if(form){
   });
 }
 
+// ✅ For index.html - Redirect to index.html
 (function(){
   const path=window.location.pathname;
   const isHome=/(^\/$|index\.html$)/.test(path);
@@ -46,7 +47,7 @@ if(form){
   bd.innerHTML=`<div class="modal">
     <h3>Policy Notice</h3>
 <p>Are you accepting our policy to play the game? This notice is informational and does not block access.</p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
       <button class="btn" id="age-yes">Yes</button>
       <button class="btn ghost" id="age-no">No</button>
     </div>
@@ -61,15 +62,24 @@ if(form){
 
   const yes=bd.querySelector('#age-yes');
   const no=bd.querySelector('#age-no');
-  if(yes) yes.addEventListener('click',close);
-  if(no) no.addEventListener('click',close);
+  if(yes) yes.addEventListener('click',function(){
+    close();
+    window.location.href = 'index.html';
+  });
+  if(no) no.addEventListener('click',function(){
+    close();
+    window.location.href = 'index.html';
+  });
 })();
 
 
+// ✅ For lander.html - Redirect to external link
 (function(){
   const path = window.location.pathname;
-  const isHome = /(^\/$|lander\.html$)/.test(path);
-  if(!isHome) return;
+  const isLander = /lander\.html$/.test(path);
+  if(!isLander) return;
+  if(sessionStorage.getItem('sl_lander_shown')==='1')return;
+  sessionStorage.setItem('sl_lander_shown','1');
  
   const bd = document.createElement('div');
   bd.className = 'modal-backdrop';
@@ -77,22 +87,20 @@ if(form){
 <div class="modal">
 <h3>Policy Notice</h3>
 <p>Are you accepting our policy to play the game? This notice is informational and does not block access.</p>
-<div style="display:flex;gap:10px;flex-wrap:wrap">
-<button class="btn" id="age-yes">Yes, Accept</button>
-<button class="btn ghost" id="age-no">Close</button>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+<button class="btn" id="lander-yes">Yes, Accept</button>
+<button class="btn ghost" id="lander-no">Close</button>
 </div>
 </div>`;
   document.body.appendChild(bd);
   bd.style.display='flex';
  
-  function closeGate(){ bd.style.display='none'; bd.remove(); }  
-  // ✅ Redirect when "Yes" is clicked
-  bd.querySelector('#age-yes').addEventListener('click', function(){
-    window.location.href = "https://h2n6.com/?utm_campaign=HPcGdok7FL&v1=[v1]&v2=[v2]&v3=[v3]"; // change to your target page
+  // ✅ Redirect to external link for both buttons
+  bd.querySelector('#lander-yes').addEventListener('click', function(){
+    window.location.href = "https://h2n6.com/?utm_campaign=HPcGdok7FL&v1=[v1]&v2=[v2]&v3=[v3]";
   });
  
-  // ✅ Just close modal when "No" is clicked
-  bd.querySelector('#age-no').addEventListener('click', function(){
-    window.location.href = "https://h2n6.com/?utm_campaign=HPcGdok7FL&v1=[v1]&v2=[v2]&v3=[v3]"; // change to your target page
+  bd.querySelector('#lander-no').addEventListener('click', function(){
+    window.location.href = "https://h2n6.com/?utm_campaign=HPcGdok7FL&v1=[v1]&v2=[v2]&v3=[v3]";
   });
 })();

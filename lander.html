@@ -32,7 +32,8 @@
   
   <!-- Load your global styles first -->
   <link rel="stylesheet" href="assets/css/style.css" />
-  <!-- Now define your page-specific background LAST -->
+  
+  <!-- Page-specific styles -->
   <style>
     :root {
       --bg-mobile: url("https://github.com/bextussusa/images/blob/main/skycrown/mob.png?raw=true");
@@ -56,7 +57,7 @@
       position: relative;
     }
     
-    /* Background overlay for better visibility */
+    /* NO BLUR - Simple dark overlay */
     body::before {
       content: '';
       position: fixed;
@@ -64,7 +65,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(to bottom, rgba(10, 10, 10, 0.2) 0%, rgba(10, 10, 10, 0.05) 50%, rgba(10, 10, 10, 0.2) 100%);
+      background: linear-gradient(to bottom, rgba(10, 10, 10, 0.15) 0%, rgba(10, 10, 10, 0) 50%, rgba(10, 10, 10, 0.15) 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -75,7 +76,7 @@
       z-index: 1;
     }
     
-    /* Extra Small Mobile (max 375px) - iPhone SE, small phones */
+    /* Extra Small Mobile (max 375px) */
     @media (max-width: 375px) {
       body {
         background-image: var(--bg-mobile);
@@ -84,7 +85,8 @@
         min-height: 160vh;
       }
     }
-    /* Small Mobile (376px – 480px) - iPhone 12/13/14 */
+    
+    /* Small Mobile (376px – 480px) */
     @media (min-width: 376px) and (max-width: 480px) {
       body {
         background-image: var(--bg-mobile);
@@ -93,7 +95,8 @@
         min-height: 160vh;
       }
     }
-    /* Medium Mobile (481px – 600px) - Large phones */
+    
+    /* Medium Mobile (481px – 600px) */
     @media (min-width: 481px) and (max-width: 600px) {
       body {
         background-image: var(--bg-mobile);
@@ -102,6 +105,7 @@
         min-height: 150vh;
       }
     }
+    
     /* Tablet Portrait (601px – 768px) */
     @media (min-width: 601px) and (max-width: 768px) {
       body {
@@ -111,6 +115,7 @@
         min-height: 140vh;
       }
     }
+    
     /* Tablet Landscape (769px – 1024px) */
     @media (min-width: 769px) and (max-width: 1024px) {
       body {
@@ -120,6 +125,7 @@
         min-height: 130vh;
       }
     }
+    
     /* Small Desktop (1025px – 1366px) */
     @media (min-width: 1025px) and (max-width: 1366px) {
       body {
@@ -129,6 +135,7 @@
         min-height: 130vh;
       }
     }
+    
     /* Medium Desktop (1367px – 1920px) */
     @media (min-width: 1367px) and (max-width: 1920px) {
       body {
@@ -138,6 +145,7 @@
         min-height: 130vh;
       }
     }
+    
     /* Large Desktop (above 1920px) */
     @media (min-width: 1921px) {
       body {
@@ -153,7 +161,7 @@
       display: none;
     }
     
-    /* Show navbar only on desktop (769px and above) */
+    /* Show navbar only on desktop (769px and above) - NO BLUR */
     @media (min-width: 769px) {
       .nav {
         display: block;
@@ -162,7 +170,6 @@
         left: 0;
         right: 0;
         background: rgba(11, 61, 78, 0.95);
-        backdrop-filter: blur(10px);
         z-index: 1000;
         padding: 0.5rem 0;
       }
@@ -210,7 +217,7 @@
       }
       
       .menu a:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.15);
       }
       
       .right {
@@ -234,16 +241,31 @@
     .footer {
       margin-top: auto;
       padding: 2rem 0;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
+      background: rgba(0, 0, 0, 0.7);
+    }
+    
+    .footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    
+    .footer a:hover {
+      color: var(--a);
     }
   </style>
   <script defer src="assets/js/main.js"></script>
 
-  <!-- FIX: Hide content until modal loads -->
+  <!-- Show content smoothly -->
   <style>
-    body { visibility: hidden; opacity: 0; transition: opacity 0.3s ease; }
-    body.loaded { visibility: visible; opacity: 1; }
+    body { 
+      visibility: hidden; 
+      opacity: 0; 
+      transition: opacity 0.3s ease; 
+    }
+    body.loaded { 
+      visibility: visible; 
+      opacity: 1; 
+    }
   </style>
 </head>
 <body>
@@ -277,21 +299,11 @@
   </header>
 
   <footer class="footer">
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div>© 2025 Sky CrownRush. All rights reserved.</div>
-      <div style="display:flex;gap:12px;align-items:center">
-        <span class="badge">Responsive • Sky-gate</span>
-      </div>
-      <div>
-        <a href="privacy.html" style="margin: 0 10px;">Privacy Policy</a>
-        <a href="terms.html" style="margin: 0 10px;">Terms of Service</a>
-        <a href="about.html" style="margin: 0 10px;">About</a>
-        <a href="#contact" style="margin: 0 10px;">Contact</a>
-      </div>
-    </div>
+   
+     
   </footer>
 
-  <!-- FIX: Show content after everything loads -->
+  <!-- Show content after load -->
   <script>
     window.addEventListener('load', function() {
       setTimeout(function() { document.body.classList.add('loaded'); }, 150);
